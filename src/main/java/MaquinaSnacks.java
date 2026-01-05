@@ -43,8 +43,29 @@ public class MaquinaSnacks {
 
     private static boolean ejecutarOpciones(int opcion, Scanner consola, List<Snack> productos) {
         var salir = false;
-        
+        switch (opcion) {
+            case 1 -> comprarSnack(consola, productos);
+        }
         return salir;
+    }
+
+    private static void comprarSnack (Scanner consola, List<Snack> productos) {
+        System.out.print("Qué snack quieres comprar (id)?: ");
+        var idSnack = Integer.parseInt(consola.nextLine());
+        // Validación
+        var snackEncontrado = false;
+        for(var snack: Snacks.getSnacks()) {
+            if (idSnack == snack.getIdSnack()) {
+                // Agregar snack porque se encontró
+                productos.add(snack);
+                System.out.println("Snack agregado: " + snack);
+                snackEncontrado = true;
+                break;
+            }
+        }
+        if(!snackEncontrado) {
+            System.out.println("Id de snack no encontrado: " + idSnack);
+        }
     }
 
 }
